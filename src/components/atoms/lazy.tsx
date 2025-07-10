@@ -1,16 +1,19 @@
-// src/components/atoms/lazy.tsx
-import React, { Suspense } from "react";
+import React, { Suspense, LazyExoticComponent } from 'react'
 
-type LazyWrapperProps = {
-  component: React.LazyExoticComponent<React.ComponentType<any>>;
-};
+type LazyWrapperProps<T extends Record<string, unknown> = Record<string, never>> = Readonly<{
+  component: LazyExoticComponent<React.ComponentType<T>>
+  props?: Readonly<T>
+}>
 
-const LazyWrapper: React.FC<LazyWrapperProps> = ({ component: Component }) => {
+function LazyWrapper<T extends Record<string, unknown>>({
+  component: Component,
+  props
+}: LazyWrapperProps<T>) {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <Component />
+      <Component {...(props as T)} />
     </Suspense>
-  );
-};
+  )
+}
 
-export default LazyWrapper;
+export default LazyWrapper

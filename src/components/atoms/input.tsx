@@ -1,19 +1,19 @@
 // Input.tsx
-import React from 'react';
-import { Input } from 'antd';
-import { InputProps } from 'antd/es/input';
-import '../../styles/form.css';
+import React from 'react'
+import { Input } from 'antd'
+import { InputProps } from 'antd/es/input'
+import '../../styles/form.css'
 
 interface FormInputProps extends InputProps {
-  label?: string;
-  prefix?: React.ReactNode;
-  theme?: 'light' | 'dark';
+  label?: string
+  prefix?: React.ReactNode
+  theme?: 'light' | 'dark'
 }
 
-const InputAtom: React.FC<FormInputProps> = ({ prefix, theme = 'light', ...rest }) => {
-  return (
-    <Input {...rest} prefix={prefix} className={`input-${theme}`} />
-  );
-};
+function InputAtom(props: Readonly<FormInputProps>) {
+  const { prefix, theme = 'light', ...rest } = props
 
-export default InputAtom;
+  return <Input {...rest} prefix={prefix} className={`input-${theme}`} />
+}
+
+export default InputAtom

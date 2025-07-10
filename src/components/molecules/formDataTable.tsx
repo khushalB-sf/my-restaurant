@@ -1,26 +1,36 @@
-import React from "react";
-import { TableColumnsType, TableProps } from "antd";
-import TableAtom from "../atoms/table";
-import { FormDataTableProps, FormData } from "../../interface/types";
-import { DeleteOutlined, CopyOutlined, CheckOutlined } from "@ant-design/icons";
-import ButtonAtom from "../atoms/button";
-import useCopyToClipboard from "../../hooks/useCopyToClipboard";
+import React from 'react'
+import { TableProps, TableColumnsType } from 'antd'
+import { CheckOutlined, CopyOutlined, DeleteOutlined } from '@ant-design/icons'
 
-const FormDataTable: React.FC<FormDataTableProps> = ({
-  dataSource,
-  handleDelete
-}) => {
-  const { copyToClipboard, isCopied } = useCopyToClipboard();
+import ButtonAtom from '@/components/atoms/button'
+import TableAtom from '@/components/atoms/table'
+import useCopyToClipboard from '@/hooks/useCopyToClipboard'
+
+export type FormData = {
+  id: string
+  name: string
+  email: string
+  phone?: string
+}
+
+export type FormDataTableProps = {
+  dataSource: FormData[]
+  handleDelete: (id: string) => void
+}
+
+function FormDataTable(props: Readonly<FormDataTableProps>) {
+  const { dataSource, handleDelete } = props
+  const { copyToClipboard, isCopied } = useCopyToClipboard()
 
   const columns: TableColumnsType<FormData> = [
     {
-      title: "ID",
-      dataIndex: "id",
+      title: 'ID',
+      dataIndex: 'id',
       sorter: {
-        compare: (a, b) => (a.id && b.id) ? a.id.localeCompare(b.id) : 0,
+        compare: (a, b) => (a.id && b.id ? a.id.localeCompare(b.id) : 0),
         multiple: 1
       },
-      render: (text) => (
+      render: (text: string) => (
         <div>
           <span>{text}</span>
           <ButtonAtom
@@ -33,17 +43,17 @@ const FormDataTable: React.FC<FormDataTableProps> = ({
       )
     },
     {
-      title: "Name",
-      dataIndex: "name",
+      title: 'Name',
+      dataIndex: 'name',
       sorter: {
-        compare: (a, b) => (a.name && b.name) ? a.name.localeCompare(b.name) : 0,
+        compare: (a, b) => (a.name && b.name ? a.name.localeCompare(b.name) : 0),
         multiple: 1
       }
     },
     {
-      title: "Email",
-      dataIndex: "email",
-      render: (text) => (
+      title: 'Email',
+      dataIndex: 'email',
+      render: (text: string) => (
         <div>
           <span>{text}</span>
           <ButtonAtom
@@ -56,12 +66,12 @@ const FormDataTable: React.FC<FormDataTableProps> = ({
       )
     },
     {
-      title: "Phone",
-      dataIndex: "phone"
+      title: 'Phone',
+      dataIndex: 'phone'
     },
     {
-      title: "Action",
-      render: (_text, record) => (
+      title: 'Action',
+      render: (_text: unknown, record: FormData) => (
         <span>
           <ButtonAtom
             type="link"
@@ -72,26 +82,17 @@ const FormDataTable: React.FC<FormDataTableProps> = ({
         </span>
       )
     }
-  ];
+  ]
 
-  const onChange: TableProps<FormData>["onChange"] = (
-    pagination,
-    filters,
-    sorter,
-    extra
-  ) => {
-    console.log("params", pagination, filters, sorter, extra);
-  };
+  const onChange: TableProps<FormData>['onChange'] = () => {
+    // console.log('params', pagination, filters, sorter, extra)
+  }
 
   return (
     <div>
-      <TableAtom
-        columns={columns}
-        dataSource={dataSource}
-        onChange={onChange}
-      />
+      <TableAtom columns={columns} dataSource={dataSource} onChange={onChange} />
     </div>
-  );
-};
+  )
+}
 
-export default FormDataTable;
+export default FormDataTable

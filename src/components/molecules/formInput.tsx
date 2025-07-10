@@ -1,22 +1,16 @@
-import React from "react";
-import { Form } from "antd";
-import {
-  UserOutlined,
-  MailOutlined,
-  PhoneOutlined,
-  LockOutlined
-} from "@ant-design/icons";
-import InputAtom from "../atoms/input";
-import "../../styles/form.css";
+import React from 'react'
+import { Form } from 'antd'
+import { UserOutlined, MailOutlined, PhoneOutlined, LockOutlined } from '@ant-design/icons'
+import InputAtom from '../atoms/input'
+import '../../styles/form.css'
 
-
-const FormInput: React.FC = () => {
+function FormInput() {
   return (
     <>
       <Form.Item
         label="Name"
         name="name"
-        rules={[{ required: true, message: "Please enter your name!" }]}
+        rules={[{ required: true, message: 'Please enter your name!' }]}
       >
         <InputAtom prefix={<UserOutlined />} placeholder="Enter your name" />
       </Form.Item>
@@ -25,8 +19,8 @@ const FormInput: React.FC = () => {
         label="Email"
         name="email"
         rules={[
-          { required: true, message: "Please enter your email!" },
-          { type: "email", message: "Please enter a valid email address!" }
+          { required: true, message: 'Please enter your email!' },
+          { type: 'email', message: 'Please enter a valid email address!' }
         ]}
       >
         <InputAtom prefix={<MailOutlined />} placeholder="Enter your email" />
@@ -35,7 +29,7 @@ const FormInput: React.FC = () => {
       <Form.Item
         label="Phone Number"
         name="phone"
-        rules={[{ required: true, message: "Please enter your phone number!" }]}
+        rules={[{ required: true, message: 'Please enter your phone number!' }]}
       >
         <InputAtom prefix={<PhoneOutlined />} placeholder="Enter your phone number" />
       </Form.Item>
@@ -43,16 +37,12 @@ const FormInput: React.FC = () => {
       <Form.Item
         label="Password"
         name="password"
-        rules={[{ required: true, message: "Please enter your password!" }]}
+        rules={[{ required: true, message: 'Please enter your password!' }]}
       >
-        <InputAtom
-          prefix={<LockOutlined />}
-          type="password"
-          placeholder="Enter your password"
-        />
+        <InputAtom prefix={<LockOutlined />} type="password" placeholder="Enter your password" />
       </Form.Item>
     </>
-  );
-};
+  )
+}
 
-export default FormInput;
+export default FormInput

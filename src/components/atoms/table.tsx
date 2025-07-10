@@ -1,8 +1,8 @@
-import { Table, TableProps } from "antd";
-import React from "react";
+import React from 'react'
+import { Table, TableProps } from 'antd'
 
-const TableAtom: React.FC<TableProps> = ({ ...props }) => {
-  return <Table {...props} />;
-};
+function TableAtom<T extends object>(props: Readonly<TableProps<T>>) {
+  return <Table {...props} />
+}
 
-export default TableAtom;
+export default TableAtom

@@ -1,10 +1,8 @@
-import React from "react";
-import { Tabs, TabsProps } from "antd";
+import React from 'react'
+import { Tabs, TabsProps } from 'antd'
 
-export const { TabPane } = Tabs;
+function TabsAtom(props: Readonly<TabsProps>) {
+  return <Tabs {...props} />
+}
 
-const TabsAtom: React.FC<TabsProps> = ({ ...props }) => {
-  return <Tabs {...props} />;
-};
-
-export default TabsAtom;
+export default TabsAtom

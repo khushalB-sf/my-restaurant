@@ -1,11 +1,22 @@
 // create a pageNotfound page
-import React from "react";
-const NotFoundPage: React.FC = () => {
+import React from 'react'
+import Seo from '@/components/atoms/seo.server'
+
+function MenuPage() {
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h1>404 - Page Not Found</h1>
-      <p>The page you are looking for does not exist.</p>
-    </div>
-  );
-};
-export default NotFoundPage;
+    <>
+      <Seo
+        title="Menu list - My Restaurant"
+        description="Track your progress and manage your profile in one place."
+        keywords="dashboard, app, analytics"
+        image="/meta-image.png"
+        url="http://localhost:5173/dashboard"
+      />
+      <div>
+        <h1 className="text-xl font-bold mb-4">Dashboard</h1>
+      </div>
+    </>
+  )
+}
+
+export default MenuPage

@@ -1,14 +1,22 @@
 // src/pages/MenuPage.tsx
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React from 'react'
+import Seo from '@/components/atoms/seo.server'
 
-const MenuPage: React.FC = () => {
+function MenuPage() {
   return (
-    <div>
-      <h1 className="text-xl font-bold mb-4">Menu Management</h1>
-      <Outlet />
-    </div>
-  );
-};
+    <>
+      <Seo
+        title="Menu list - My Restaurant"
+        description="Track your progress and manage your profile in one place."
+        keywords="dashboard, app, analytics"
+        image="/meta-image.png"
+        url="http://localhost:5173/dashboard"
+      />
+      <div>
+        <h1 className="text-xl font-bold mb-4">Dashboard</h1>
+      </div>
+    </>
+  )
+}
 
-export default MenuPage;
+export default MenuPage

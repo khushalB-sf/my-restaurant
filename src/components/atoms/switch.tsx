@@ -1,9 +1,11 @@
-import { Switch, SwitchProps } from "antd";
+import { Switch, SwitchProps } from 'antd'
 
-import React from "react";
+import React from 'react'
 
-const SwitchAtom: React.FC<SwitchProps> = ({ ...props }) => {
-  return <Switch {...props} />;
-};
+function SwitchAtom(props: Readonly<SwitchProps>) {
+  const { checkedChildren, ...rest } = props
 
-export default SwitchAtom;
+  return <Switch checkedChildren={checkedChildren} {...rest} />
+}
+
+export default SwitchAtom

@@ -1,22 +1,21 @@
-import React from "react";
-import { Form } from "antd";
-import { v4 as uuidv4 } from "uuid";
-import FormInput from "../molecules/formInput";
-import ButtonAtom from "../atoms/button";
-import { FormContainerProps, FormData } from "../../interface/types";
+import React from 'react'
+import { Form } from 'antd'
+import { v4 as uuidv4 } from 'uuid'
+import FormInput from '../molecules/formInput'
+import ButtonAtom from '../atoms/button'
+import { FormContainerProps, FormData } from '../../interface/types'
 
-const FormContainer: React.FC<FormContainerProps> = ({ updateFormData }) => {
-  const [form] = Form.useForm();
+function FormContainer({ updateFormData }: Readonly<FormContainerProps>) {
+  const [form] = Form.useForm<FormData>()
 
   const handleSubmit = (values: FormData) => {
     const newFormData: FormData = {
       ...values,
-      id: uuidv4() as string
-    };
-    updateFormData(newFormData);
-    form.resetFields();
-    
-  };
+      id: uuidv4()
+    }
+    updateFormData(newFormData)
+    form.resetFields()
+  }
 
   return (
     <div className="formContainer">
@@ -29,7 +28,7 @@ const FormContainer: React.FC<FormContainerProps> = ({ updateFormData }) => {
         </Form.Item>
       </Form>
     </div>
-  );
-};
+  )
+}
 
-export default FormContainer;
+export default FormContainer

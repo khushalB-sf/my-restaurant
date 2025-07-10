@@ -1,42 +1,76 @@
-import React from "react";
-import "../../styles/navbar.css"; // Your component-specific styles
-import ImageAtom from "../atoms/image";
-import SwitchAtom from "../atoms/switch";
-import { useTheme } from "../../context/themeContext";
-import logo from "../../assets/simform.svg";
-import { useSelector } from "react-redux";
-import { privateRoutes, publicRoutes } from "../../routes/routes";
-const Navbar: React.FC = () => {
-  const { theme, toggleTheme } = useTheme();
+import React from 'react'
+import '../../styles/navbar.css'
+import { Layout, Menu } from 'antd'
+import { useLocation, useNavigate } from 'react-router-dom'
+import ImageAtom from '../atoms/image'
+import SwitchAtom from '../atoms/switch'
+import { useTheme } from '../../context/themeContext'
+import logo from '../../assets/simform.svg'
 
-  const { isAuthenticated } = useSelector((state: any) => state.auth);
+const { Header } = Layout
 
-  const accessableRoutes = isAuthenticated ? privateRoutes : publicRoutes;
-  console.log("Navbar isAuthenticated:", isAuthenticated);
+function Navbar() {
+  const { theme, toggleTheme } = useTheme()
+  const navigate = useNavigate()
+  const { pathname } = useLocation()
+
+  const items = [
+    {
+      key: '1',
+      label: 'Dashboard',
+      link: '/',
+      onClick: () => navigate('/')
+    },
+    {
+      key: '2',
+      label: 'Menu',
+      link: '/menu',
+      onClick: () => navigate('/menu')
+    }
+  ]
 
   const handleToggle = () => {
-    toggleTheme();
-  };
+    toggleTheme()
+  }
 
   return (
-    <div
-      className={`navbarContainer ${theme === "dark" ? "dark-theme" : "light-theme"}`}
-    >
+    <Header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
       <div className="logoContainer">
         <ImageAtom src={logo} alt="Logo" preview={false} />
       </div>
-      
-      <div className="themeSwitchContainer">
+      <Menu
+        theme="dark"
+        defaultSelectedKeys={[items.find((item) => item.link === pathname)?.key ?? '1']}
+        mode="horizontal"
+        items={items}
+        style={{ flex: 1, minWidth: 0, marginLeft: '20px' }}
+      />
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <SwitchAtom
           className="toggleThemeSwitch"
           onChange={handleToggle}
           checkedChildren="Light"
           unCheckedChildren="Dark"
-          defaultChecked={theme === "light"}
+          defaultChecked={theme === 'light'}
+        />
+        <Menu
+          theme="dark"
+          mode="horizontal"
+          items={[
+            {
+              key: '3',
+              label: 'Logout',
+              onClick: () => {
+                localStorage.removeItem('token')
+                navigate('/login')
+              }
+            }
+          ]}
+          style={{ flex: 1, minWidth: 0, marginLeft: '20px' }}
         />
       </div>
-    </div>
-  );
-};
+    </Header>
+  )
+}
 
-export default Navbar;
+export default Navbar

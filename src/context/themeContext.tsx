@@ -1,41 +1,42 @@
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import React, { createContext, useState, useContext, ReactNode, useMemo, useEffect } from 'react'
 
-type Theme = 'light' | 'dark';
+type Theme = 'light' | 'dark'
 
 interface ThemeContextType {
-  theme: Theme;
-  toggleTheme: () => void;
+  theme: Theme
+  toggleTheme: () => void
 }
 
-const initialTheme: Theme = 'light';
+const initialTheme: Theme = 'light'
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export const useTheme = (): ThemeContextType => {
-  const context = useContext(ThemeContext);
+  const context = useContext(ThemeContext)
   if (!context) {
-    throw new Error('useTheme must be used within a ThemeProvider');
+    throw new Error('useTheme must be used within a ThemeProvider')
   }
-  return context;
-};
+  return context
+}
 
-export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>(initialTheme);
+export function ThemeProvider({ children }: { readonly children: ReactNode }) {
+  const [theme, setTheme] = useState<Theme>(initialTheme)
 
   const toggleTheme = (): void => {
-    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
-  };
-
-  if (theme === 'dark') {
-    document.body.classList.add('dark-theme');
-  } else {
-    document.body.classList.remove('dark-theme');
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'))
   }
 
-  const contextValue: ThemeContextType = {
-    theme,
-    toggleTheme,
-  };
+  useEffect(() => {
+    document.body.classList.toggle('dark-theme', theme === 'dark')
+  }, [theme])
 
-  return <ThemeContext.Provider value={contextValue}>{children}</ThemeContext.Provider>;
-};
+  const contextValue = useMemo(
+    () => ({
+      theme,
+      toggleTheme
+    }),
+    [theme]
+  )
+
+  return <ThemeContext.Provider value={contextValue}>{children}</ThemeContext.Provider>
+}

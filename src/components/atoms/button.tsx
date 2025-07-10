@@ -1,7 +1,7 @@
-import React from "react";
-import { ButtonProps, Button } from "antd";
-const ButtonAtom: React.FC<ButtonProps> = ({ ...props }) => {
-  return <Button {...props} />;
-};
+import React from 'react'
+import { ButtonProps, Button } from 'antd'
 
-export default ButtonAtom;
+function ButtonAtom(props: Readonly<ButtonProps>) {
+  return <Button {...props} />
+}
+export default ButtonAtom

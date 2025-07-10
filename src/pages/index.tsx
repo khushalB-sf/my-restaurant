@@ -3,7 +3,7 @@ const index = () => {
     <div>
       <p>Hello world</p>
     </div>
-  );
-};
+  )
+}
 
-export default index;
+export default index
