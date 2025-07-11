@@ -1,8 +1,9 @@
-// src/pages/MenuPage.tsx
-import React from 'react'
+import { Suspense } from 'react'
 import Seo from '@/components/atoms/seo.server'
+import Menu from '@/features/menu/Menu'
+import RecipeDetailCardSkeleton from '@/features/menu/components/RecepieDetailCardSkeleton'
 
-function MenuPage() {
+export default function MenuPage() {
   return (
     <>
       <Seo
@@ -13,10 +14,10 @@ function MenuPage() {
         url="http://localhost:5173/dashboard"
       />
       <div>
-        <h1 className="text-xl font-bold mb-4">Dashboard</h1>
+        <Suspense fallback={<RecipeDetailCardSkeleton />}>
+          <Menu />
+        </Suspense>
       </div>
     </>
   )
 }
-
-export default MenuPage

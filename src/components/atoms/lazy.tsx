@@ -1,3 +1,4 @@
+import { Spin } from 'antd'
 import React, { Suspense, LazyExoticComponent } from 'react'
 
 type LazyWrapperProps<T extends Record<string, unknown> = Record<string, never>> = Readonly<{
@@ -10,7 +11,7 @@ function LazyWrapper<T extends Record<string, unknown>>({
   props
 }: LazyWrapperProps<T>) {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Spin fullscreen />}>
       <Component {...(props as T)} />
     </Suspense>
   )

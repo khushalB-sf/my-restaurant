@@ -1,3 +1,5 @@
+'use server'
+
 import React from 'react'
 import Seo from '@/components/atoms/seo.server' // Make sure this path is correct
 

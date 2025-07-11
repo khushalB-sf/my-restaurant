@@ -33,6 +33,11 @@ function Navbar() {
     toggleTheme()
   }
 
+  const selectedTab =
+    [...items]
+      .sort((a, b) => b.link.length - a.link.length)
+      .find((item) => pathname.startsWith(item.link))?.key || '1'
+
   return (
     <Header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
       <div className="logoContainer">
@@ -40,7 +45,7 @@ function Navbar() {
       </div>
       <Menu
         theme="dark"
-        defaultSelectedKeys={[items.find((item) => item.link === pathname)?.key ?? '1']}
+        defaultSelectedKeys={[selectedTab]}
         mode="horizontal"
         items={items}
         style={{ flex: 1, minWidth: 0, marginLeft: '20px' }}

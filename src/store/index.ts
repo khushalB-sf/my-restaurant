@@ -3,6 +3,8 @@ import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import menuSlice from '../features/menu/menuSlice'
 import counterSlice from '../features/counter/counterSlice'
+import menuItemSlice from '../features/menuItem/menuItemSlice'
+import dashboardSlice from '../features/dashboard/dashboardSlice'
 import authSlice from '../features/auth/authSlice'
 import { userApi } from './api/userApi'
 
@@ -11,7 +13,9 @@ export const store = configureStore({
     menu: menuSlice,
     counter: counterSlice,
     auth: authSlice,
-    [userApi.reducerPath]: userApi.reducer // Add the userApi reducer
+    menuItem: menuItemSlice,
+    dashboard: dashboardSlice,
+    [userApi.reducerPath]: userApi.reducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(userApi.middleware) // Add the userApi middleware
 })

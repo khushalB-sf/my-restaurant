@@ -1,4 +1,5 @@
-// create a pageNotfound page
+'use server'
+
 import React from 'react'
 import Seo from '@/components/atoms/seo.server'
 

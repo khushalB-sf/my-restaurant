@@ -1,9 +1,7 @@
-'use server'
-
-import React from 'react'
 import Seo from '@/components/atoms/seo.server'
+import Dashboard from '@/features/dashboard/components/DashboardLayout'
 
-function DashboardPage() {
+export default function DashboardPage() {
   return (
     <>
       <Seo
@@ -13,13 +11,7 @@ function DashboardPage() {
         image="/meta-image.png"
         url="http://http://localhost:5173//dashboard"
       />
-      <body>
-        <div>
-          <h1 className="text-xl font-bold mb-4">Dashboard</h1>
-        </div>
-      </body>
+      <Dashboard />
     </>
   )
 }
-
-export default DashboardPage

@@ -7,6 +7,7 @@ function useLocalStorage<T>(key: string, initialValue: T | (() => T)) {
       try {
         return JSON.parse(jsonValue) as T
       } catch (e) {
+        // eslint-disable-next-line no-console
         console.warn(`Invalid JSON in localStorage for key: ${key}`, e)
       }
     }
